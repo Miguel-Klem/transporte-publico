@@ -19,8 +19,8 @@ CREATE TABLE veiculo (
   placa      CHAR(7)     NOT NULL UNIQUE,
   prefixo    VARCHAR(10) NOT NULL,  -- N° do ônibus (Pode haver prefixos iguais, mas não placas iguais)
   modelo     VARCHAR(50) NOT NULL,
-  capacidade INT         NOT NULL,                  -- quantos passageiros cabem
-  status     VARCHAR(20) NOT NULL DEFAULT 'ATIVO'   -- ativo, em manutenção, desativado, etc
+  capacidade INT         NOT NULL,                  -- Quantos passageiros cabem
+  status     VARCHAR(20) NOT NULL DEFAULT 'ATIVO'   -- Ativo, Manutenção, Desativado, etc
 ) ENGINE=InnoDB;
 
 -- Motoristas.
@@ -37,9 +37,7 @@ CREATE TABLE motivo_atraso (
 ) ENGINE=InnoDB;
 
 -- Viagens: cada viagem é feita por UMA linha, com UM veículo e UM motorista.
--- As colunas "real" começam vazias (NULL) porque a viagem pode ainda não ter
--- saído ou chegado. O ON DELETE RESTRICT impede apagar uma linha, veículo ou
--- motorista que já tenha viagens, para não perder o histórico.
+-- As colunas "real" começam vazias (NULL) porque a viagem pode ainda não ter saído ou chegado. O ON DELETE RESTRICT impede apagar uma linha, veículo ou motorista que já tenha viagens, para não perder o histórico.
 CREATE TABLE viagem (
   id_viagem        INT AUTO_INCREMENT PRIMARY KEY,
   id_linha         INT  NOT NULL,
@@ -64,7 +62,7 @@ CREATE TABLE atraso (
   id_viagem      INT NOT NULL,
   id_motivo      INT NOT NULL,
   minutos_atraso INT NOT NULL,
-  observacao     VARCHAR(150) NULL,                  -- um comentário opcional
+  observacao     VARCHAR(150) NULL,
   FOREIGN KEY (id_viagem) REFERENCES viagem (id_viagem)        ON DELETE CASCADE,
   FOREIGN KEY (id_motivo) REFERENCES motivo_atraso (id_motivo) ON DELETE RESTRICT
 ) ENGINE=InnoDB;
