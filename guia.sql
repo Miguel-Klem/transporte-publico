@@ -1,0 +1,17 @@
+-- PRIMARY KEY - Identifica cada registro (não repete e não fica vazia)
+-- AUTO_INCREMENT - O próprio MySQL numera os registros
+-- NOT NULL - O campo é obrigatório
+-- UNIQUE - O valor não pode se repetir na tabela
+-- DEFAULT - O valor usado quando ninguém informa nada
+-- ENGINE=InnoDB; -  Responsável por gerenciar como os dados são lidos, gravados e protegidos no disco / (ACID) Garante atomicidade, consistência, isolamento e durabilidade, permitindo reverter operações (rollback) em caso de erro
+-- FOREIGN KEY REFERENCES - Liga a viagem a um registro que já existe nas tabelas PK 
+-- ON DELETE RESTRICT - Impede apagar linha, veículo ou motorista que tenha viagens (RN05)
+-- NULL - Deixa o campo vazio: A viagem pode ainda não ter saído ou chegado
+-- ON DELETE CASCADE faz o contrário do RESTRICT: se a viagem for apagada, os atrasos dela vão embora junto, porque um atraso sem viagem não faz sentido (RN06)
+-- INSERT - cria um registro novo
+-- UPDATE - muda um registro que já existe (o WHERE escolhe qual)
+-- DELETE - apaga registros (o WHERE escolhe quais)
+-- INNER JOIN  Junta tabelas pelas chaves (aqui, a linha com as suas viagens)
+-- WHERE - Filtra as linhas que interessam
+-- GROUP BY - Agrupa as linhas iguais, e o COUNT conta quantas há em cada grupo
+-- ORDER BY - Ordena o resultado (DESC = do maior para o menor)
