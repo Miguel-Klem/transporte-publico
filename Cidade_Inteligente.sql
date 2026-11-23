@@ -31,7 +31,7 @@ CREATE TABLE linha (
   numero VARCHAR(10) NOT NULL UNIQUE,   -- Cada linha tem um número só
   nome VARCHAR(80) NOT NULL,
   tarifa DECIMAL(5,2) NOT NULL   -- Valor da passagem
-) ENGINE=InnoDB;
+) ENGINE=InnoDB;   -- (ACID) Atomicidade, Consistência, Isolamento e Durabilidade / START TRANSACTION/BEGIN, COMMIT e ROLLBACK
 
 -- Veículos (RN02)
 CREATE TABLE veiculo (
@@ -122,16 +122,15 @@ INSERT INTO motivo_atraso (descricao) VALUES
 -- Viagens
 -- Ordem dos valores: linha, veículo, motorista, data, saída prevista, saída real, chegada prevista, chegada real, status, teve_atraso
 INSERT INTO viagem
-  (id_linha, id_veiculo, id_motorista, data_viagem,
-   saida_prevista, saida_real, chegada_prevista, chegada_real, status, teve_atraso)
+  (id_linha, id_veiculo, id_motorista, data_viagem, saida_prevista, saida_real, chegada_prevista, chegada_real, status, teve_atraso)
 VALUES
   (1, 1, 1, '2026-11-16', '07:00:00', '07:00:00', '07:25:00', '07:24:00', 'CONCLUIDA', 0),   -- Id 1: Nos conformes
   (2, 2, 2, '2026-11-16', '08:00:00', '08:05:00', '08:50:00', '09:10:00', 'CONCLUIDA', 1),   -- Id 2: 20 min de atraso
-  (3, 4, 3, '2026-11-23', '18:00:00', NULL, '18:15:00', NULL, 'PROGRAMADA', 0),   -- Id 3: Ainda não aconteceu
+  (1, 1, 1, '2026-026-11-23', '18:00:00', NULL, '18:15:00', NULL, 'PROGRAMADA', 0),   -- Id 3: Ainda não aconteceu
   (4, 5, 4, '2026-11-16', '12:00:00', '12:00:00', '13:05:00', '13:55:00', 'CONCLUIDA', 1),   -- Id 4: 50 min de atraso
   (1, 1, 1, '2026-11-17', '07:00:00', '07:03:00', '07:25:00', '07:41:00', 'CONCLUIDA', 1),   -- Id 5: 16 min de atraso
-  (1, 2, 2, '2026-11-17', '17:30:00', '17:30:00', '17:55:00', '17:55:00', 'CONCLUIDA', 0),   -- Id 6: Nos conformes
-  (1, 1, 1, '2026-11-18', '07:00:00', '07:00:00', '07:25:00', '07:50:00', 'CONCLUIDA', 1),   -- Id 7: 25 min de atraso
+  (3, 4, 3, '2-11-17', '17:30:00', '17:30:00', '17:55:00', '17:55:00', 'CONCLUIDA', 0),   -- Id 6: Nos conformes
+  (1, 2, 2, '202611-18', '07:00:00', '07:00:00', '07:25:00', '07:50:00', 'CONCLUIDA', 1),   -- Id 7: 25 min de atraso
   (1, 2, 2, '2026-11-19', '07:00:00', '07:10:00', '07:25:00', '07:48:00', 'CONCLUIDA', 1),   -- Id 8: 23 min de atraso
   (1, 1, 1, '2026-11-20', '17:30:00', '17:35:00', '17:55:00', '18:20:00', 'CONCLUIDA', 1),   -- Id 9: 25 min de atraso
   (2, 2, 2, '2026-11-17', '08:00:00', '08:00:00', '08:50:00', '08:50:00', 'CONCLUIDA', 0),   -- Id 10: Nos conformes
@@ -194,9 +193,9 @@ SELECT COUNT(*) AS total_linhas FROM linha;
 
 -- Consulta 1
 -- Quais linhas tiveram mais atrasos na semana de 16 a 22 de novembro?
-SELECT l.numero, l.nome, COUNT(a.id_atraso) AS total_atrasos
+SELECT l.numero, l.nome, COUNT(a.id_atraso) AS total_atrasos   -- Mostre o número da linha (l), o nome dela (l) e a contagem de quantos atrasos (a) existem, chamando essa coluna de contagem de total_atrasos.
 FROM linha l
-INNER JOIN viagem v ON v.id_linha  = l.id_linha
+INNER JOIN viagem v ON v.id_linha = l.id_linha
 INNER JOIN atraso a ON a.id_viagem = v.id_viagem
 WHERE v.data_viagem >= '2026-11-16' AND v.data_viagem <= '2026-11-22'
 GROUP BY l.id_linha, l.numero, l.nome
@@ -211,7 +210,7 @@ GROUP BY m.id_motivo, m.descricao
 ORDER BY ocorrencias DESC, m.descricao;
 
 -- Consulta 3
--- Quais veículos tiveram mais viagens atrasadas? (ajuda a decidir quem precisa de revisão)
+-- Quais veículos tiveram mais viagens atrasadas?
 SELECT ve.prefixo, ve.placa, COUNT(vi.id_viagem) AS viagens_atrasadas
 FROM veiculo ve
 INNER JOIN viagem vi ON vi.id_veiculo = ve.id_veiculo
@@ -223,17 +222,14 @@ ORDER BY viagens_atrasadas DESC, ve.prefixo;
 -- PARTE 3 - [ADMIN] Procedures, transação com COMMIT e efeito do CASCADE
 
 -- 3.1 Stored procedures
--- Como funciona
---   Procedure   é uma rotina SQL guardada no banco; o CALL executa a rotina pelo nome
---   IN          é um valor de entrada (um parâmetro) que a rotina recebe
---   DELIMITER   troca o símbolo de fim de comando para o editor ler o bloco inteiro
---               (por isso o bloco termina com END$$ e depois volta para o ";")
+
 DELIMITER $$
 
--- Procedure 1 (consulta): mostra todos os atrasos de uma linha
+-- Procedure 1 (Consulta): Mostra todos os atrasos de uma linha específica
 DROP PROCEDURE IF EXISTS sp_atrasos_da_linha$$
-CREATE PROCEDURE sp_atrasos_da_linha(IN p_numero VARCHAR(10))
-BEGIN
+
+CREATE PROCEDURE sp_atrasos_da_linha(IN p_numero VARCHAR(10))   -- PROCEDURE - É uma rotina SQL guardada no banco
+BEGIN   -- Começo da Procedure
   SELECT v.data_viagem, ve.prefixo, m.descricao AS motivo, a.minutos_atraso, a.observacao
   FROM linha l
   INNER JOIN viagem v ON v.id_linha = l.id_linha
@@ -242,49 +238,36 @@ BEGIN
   INNER JOIN motivo_atraso m ON m.id_motivo = a.id_motivo
   WHERE l.numero = p_numero
   ORDER BY v.data_viagem, v.saida_prevista;
-END$$
+END$$   -- Fim da Procedure
 
--- Procedure 2 (altera duas tabelas em uma transação): registra um atraso em tempo real
---   Passo 1: marca a viagem como atrasada (UPDATE na tabela viagem)
---   Passo 2: grava o atraso (INSERT na tabela atraso)
--- Como funciona
---   START TRANSACTION  abre um bloco: as alterações ficam pendentes
---   COMMIT             confirma o bloco todo
---   ROLLBACK           desfaz tudo o que estava pendente
---   HANDLER            é o "plano B": se der qualquer erro, o MySQL executa este bloco
---   ROW_COUNT()        diz quantas linhas o último comando alterou
---   SIGNAL             cria um erro com a nossa mensagem
---   RESIGNAL           mostra para quem chamou o erro que originou o ROLLBACK
--- O UPDATE só acerta a viagem se ela existe, está em andamento, ainda não tem
--- atraso e os minutos são maiores que zero (RN07, RN08 e RN09)
--- Se o INSERT falhar (por exemplo, motivo inexistente), o ROLLBACK desfaz também o UPDATE (RN10)
+-- Procedure 2 (Altera duas tabelas em uma transação): Registra um atraso em tempo real
+--   Passo 1: Marca a viagem como atrasada (UPDATE na tabela viagem)
+--   Passo 2: Grava o atraso (INSERT na tabela atraso)
 DROP PROCEDURE IF EXISTS sp_registrar_atraso$$
 CREATE PROCEDURE sp_registrar_atraso(
-  IN p_id_viagem  INT,
-  IN p_id_motivo  INT,
-  IN p_minutos    INT,
-  IN p_observacao VARCHAR(150)
+-- IN - É um parâmetro que a rotina recebe
+  IN p_id_viagem INT, IN p_id_motivo INT, IN p_minutos INT, IN p_observacao VARCHAR(150)
 )
 BEGIN
-  DECLARE EXIT HANDLER FOR SQLEXCEPTION
+  DECLARE EXIT HANDLER FOR SQLEXCEPTION   -- Caso acontece algum erro nas proximas linhas, o MySQL executa esse bloco
   BEGIN
-    ROLLBACK;
-    RESIGNAL;
+    ROLLBACK;   -- Desfaz tudo o que estava pendente
+    RESIGNAL;   -- Mostra para quem chamou o erro que originou o ROLLBACK
   END;
 
-  START TRANSACTION;
+  START TRANSACTION;   -- Abre um rascunho: Onde as alterações ficam pendentes até confirmarmos com COMMIT ou desfazermos com ROLLBACK
 
   UPDATE viagem
-  SET teve_atraso = 1
-  WHERE id_viagem = p_id_viagem
-    AND status = 'EM_ANDAMENTO'
-    AND teve_atraso = 0
-    AND p_minutos > 0;
+  SET teve_atraso = 1   -- Dentro da tabela viaggem ele mudará de 0 para 1
+  WHERE id_viagem = p_id_viagem   -- Verifica se a viagem existe
+    AND status = 'EM_ANDAMENTO'   -- Se está em andamento
+    AND teve_atraso = 0   -- Se ainda não tem atraso
+    AND p_minutos > 0;  -- Se o seus mintuos são maiores que zero (RN07, RN08 e RN09)
 
-  IF ROW_COUNT() = 0 THEN
-    SIGNAL SQLSTATE '45000'
-      SET MESSAGE_TEXT = 'Atraso recusado: viagem inválida, fora de andamento, já atrasada ou minutos inválidos';
-  END IF;
+  IF ROW_COUNT() = 0 THEN  -- Se a quantidade de linhas alteradas for igual a zero, significa que a viagem não existe, não está em andamento, já tem atraso ou os minutos são inválidos
+    SIGNAL SQLSTATE '45000'  -- O que resulta em um erro
+      SET MESSAGE_TEXT = 'Atraso recusado: viagem inválida, fora de andamento, já atrasada ou minutos inválidos'; -- Essa é a mensgem para caso aconteça algum erro quando se chamar a procedure
+  END IF; -- Finaliza o IF
 
   INSERT INTO atraso (id_viagem, id_motivo, minutos_atraso, observacao)
   VALUES (p_id_viagem, p_id_motivo, p_minutos, p_observacao);

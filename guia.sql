@@ -13,5 +13,19 @@
 -- DELETE - apaga registros (o WHERE escolhe quais)
 -- INNER JOIN  Junta tabelas pelas chaves (aqui, a linha com as suas viagens)
 -- WHERE - Filtra as linhas que interessam
--- GROUP BY - Agrupa as linhas iguais, e o COUNT conta quantas há em cada grupo
+-- GROUP BY - Agrupa as linhas iguais (COUNT, SUM, AVG, MAX ou MIN)
+-- COUNT conta quantas há em cada grupo
 -- ORDER BY - Ordena o resultado (DESC = do maior para o menor)
+-- Procedure - É uma rotina SQL guardada no banco; 
+-- CALL executa a rotina pelo nome
+-- IN - É um valor de entrada (um parâmetro) que a rotina recebe
+-- DELIMITER - Troca o símbolo de fim de comando para o editor ler o bloco inteiro, (por isso o bloco termina com END$$ e depois volta para o ";")
+-- COMMIT - confirma o bloco todo
+-- ROLLBACK - desfaz tudo o que estava pendente
+-- START TRANSACTION - abre um bloco: as alterações ficam pendentes
+-- HANDLER - É o "plano B": se der qualquer erro, o MySQL executa este bloco
+-- ROW_COUNT() - Diz quantas linhas o último comando alterou
+-- SIGNAL - Cria um erro com a nossa mensagem
+-- RESIGNAL - Mostra para quem chamou o erro que originou o ROLLBACK
+-- O UPDATE só acerta a viagem se ela existe, está em andamento, ainda não tem -- atraso e os minutos são maiores que zero (RN07, RN08 e RN09)
+-- Se o INSERT falhar (por exemplo, motivo inexistente), o ROLLBACK desfaz também o UPDATE (RN10)
