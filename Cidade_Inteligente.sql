@@ -124,25 +124,25 @@ INSERT INTO motivo_atraso (descricao) VALUES
 INSERT INTO viagem
   (id_linha, id_veiculo, id_motorista, data_viagem, saida_prevista, saida_real, chegada_prevista, chegada_real, status, teve_atraso)
 VALUES
-  (1, 1, 1, '2026-11-16', '07:00:00', '07:00:00', '07:25:00', '07:24:00', 'CONCLUIDA', 0),   -- Id 1: Nos conformes
-  (2, 2, 2, '2026-11-16', '08:00:00', '08:05:00', '08:50:00', '09:10:00', 'CONCLUIDA', 1),   -- Id 2: 20 min de atraso
-  (1, 1, 1, '2026-026-11-23', '18:00:00', NULL, '18:15:00', NULL, 'PROGRAMADA', 0),   -- Id 3: Ainda não aconteceu
-  (4, 5, 4, '2026-11-16', '12:00:00', '12:00:00', '13:05:00', '13:55:00', 'CONCLUIDA', 1),   -- Id 4: 50 min de atraso
-  (1, 1, 1, '2026-11-17', '07:00:00', '07:03:00', '07:25:00', '07:41:00', 'CONCLUIDA', 1),   -- Id 5: 16 min de atraso
-  (3, 4, 3, '2-11-17', '17:30:00', '17:30:00', '17:55:00', '17:55:00', 'CONCLUIDA', 0),   -- Id 6: Nos conformes
-  (1, 2, 2, '202611-18', '07:00:00', '07:00:00', '07:25:00', '07:50:00', 'CONCLUIDA', 1),   -- Id 7: 25 min de atraso
-  (1, 2, 2, '2026-11-19', '07:00:00', '07:10:00', '07:25:00', '07:48:00', 'CONCLUIDA', 1),   -- Id 8: 23 min de atraso
-  (1, 1, 1, '2026-11-20', '17:30:00', '17:35:00', '17:55:00', '18:20:00', 'CONCLUIDA', 1),   -- Id 9: 25 min de atraso
-  (2, 2, 2, '2026-11-17', '08:00:00', '08:00:00', '08:50:00', '08:50:00', 'CONCLUIDA', 0),   -- Id 10: Nos conformes
-  (2, 4, 3, '2026-11-18', '08:00:00', '08:12:00', '08:50:00', '09:15:00', 'CONCLUIDA', 1),   -- Id 11: 25 min de atraso
-  (2, 2, 2, '2026-11-19', '18:00:00', '18:00:00', '18:50:00', '19:20:00', 'CONCLUIDA', 1),   -- Id 12: 30 min de atraso
-  (3, 4, 3, '2026-11-17', '18:00:00', '18:00:00', '18:15:00', '18:15:00', 'CONCLUIDA', 0),   -- Id 13: Nos conformes
-  (3, 5, 4, '2026-11-18', '18:00:00', '18:04:00', '18:15:00', '18:30:00', 'CONCLUIDA', 1),   -- Id 14: 15 min de atraso
-  (4, 5, 5, '2026-11-19', '12:00:00', '12:00:00', '13:05:00', '13:05:00', 'CONCLUIDA', 0),   -- Id 15: Nos conformes
-  (4, 1, 5, '2026-11-20', '12:00:00', '12:10:00', '13:05:00', '13:40:00', 'CONCLUIDA', 1),   -- Id 16: 35 min de atraso
-  (2, 2, 2, '2026-11-20', '08:00:00', NULL, '08:50:00', NULL, 'CANCELADA', 0),   -- Id 17: Viagem cancelada
-  (3, 4, 3, '2026-11-21', '18:00:00', '18:02:00', '18:15:00', NULL, 'EM_ANDAMENTO', 0),   -- Id 18: Usada no teste de COMMIT
-  (1, 1, 1, '2026-11-21', '17:30:00', '17:32:00', '17:55:00', NULL, 'EM_ANDAMENTO', 0);   -- Id 19: Usada no teste de ROLLBACK
+  (1, 1, 1, '2026-11-16', '07:00:00', '07:00:00', '07:25:00', '07:24:00', 'CONCLUIDA', 0),  -- Id 1: no horário
+  (2, 2, 2, '2026-11-16', '08:00:00', '08:05:00', '08:50:00', '09:10:00', 'CONCLUIDA',    1),  -- Id 2: 20 min de atraso
+  (3, 4, 3, '2026-11-23', '18:00:00', NULL, '18:15:00', NULL, 'PROGRAMADA', 0),  -- Id 3: ainda não aconteceu
+  (4, 5, 4, '2026-11-16', '12:00:00', '12:00:00', '13:05:00', '13:55:00', 'CONCLUIDA', 1),  -- Id 4: 50 min de atraso
+  (1, 1, 1, '2026-11-17', '07:00:00', '07:03:00', '07:25:00', '07:41:00', 'CONCLUIDA', 1),  -- Id 5: 16 min de atraso
+  (1, 2, 2, '2026-11-17', '17:30:00', '17:30:00', '17:55:00', '17:55:00', 'CONCLUIDA', 0),  -- Id 6: no horário
+  (1, 1, 1, '2026-11-18', '07:00:00', '07:00:00', '07:25:00', '07:50:00', 'CONCLUIDA', 1),  -- Id 7: 25 min de atraso
+  (1, 2, 2, '2026-11-19', '07:00:00', '07:10:00', '07:25:00', '07:48:00', 'CONCLUIDA', 1),  -- Id 8: 23 min de atraso
+  (1, 1, 1, '2026-11-20', '17:30:00', '17:35:00', '17:55:00', '18:20:00', 'CONCLUIDA', 1),  -- Id 9: 25 min de atraso
+  (2, 2, 2, '2026-11-17', '08:00:00', '08:00:00', '08:50:00', '08:50:00', 'CONCLUIDA', 0),  -- Id 10: no horário
+  (2, 4, 3, '2026-11-18', '08:00:00', '08:12:00', '08:50:00', '09:15:00', 'CONCLUIDA', 1),  -- Id 11: 25 min de atraso
+  (2, 2, 2, '2026-11-19', '18:00:00', '18:00:00', '18:50:00', '19:20:00', 'CONCLUIDA', 1),  -- Id 12: 30 min de atraso
+  (3, 4, 3, '2026-11-17', '18:00:00', '18:00:00', '18:15:00', '18:15:00', 'CONCLUIDA', 0),  -- Id 13: no horário
+  (3, 5, 4, '2026-11-18', '18:00:00', '18:04:00', '18:15:00', '18:30:00', 'CONCLUIDA', 1),  -- Id 14: 15 min de atraso
+  (4, 5, 5, '2026-11-19', '12:00:00', '12:00:00', '13:05:00', '13:05:00', 'CONCLUIDA', 0),  -- Id 15: no horário
+  (4, 1, 5, '2026-11-20', '12:00:00', '12:10:00', '13:05:00', '13:40:00', 'CONCLUIDA', 1),  -- Id 16: 35 min de atraso
+  (2, 2, 2, '2026-11-20', '08:00:00', NULL, '08:50:00', NULL, 'CANCELADA', 0),  -- Id 17: viagem cancelada
+  (3, 4, 3, '2026-11-21', '18:00:00', '18:02:00', '18:15:00', NULL, 'EM_ANDAMENTO', 0),  -- Id 18: usada no teste de COMMIT
+  (1, 1, 1, '2026-11-21', '17:30:00', '17:32:00', '17:55:00', NULL, 'EM_ANDAMENTO', 0);  -- Id 19: usada no teste de ROLLBACK
 
 -- Atrasos (o motivo é o número da tabela motivo_atraso)
 -- Os minutos são a diferença entre a chegada real e a chegada prevista
@@ -266,68 +266,57 @@ BEGIN
 
   IF ROW_COUNT() = 0 THEN  -- Se a quantidade de linhas alteradas for igual a zero, significa que a viagem não existe, não está em andamento, já tem atraso ou os minutos são inválidos
     SIGNAL SQLSTATE '45000'  -- O que resulta em um erro
-      SET MESSAGE_TEXT = 'Atraso recusado: viagem inválida, fora de andamento, já atrasada ou minutos inválidos'; -- Essa é a mensgem para caso aconteça algum erro quando se chamar a procedure
+      SET MESSAGE_TEXT = 'Atraso recusado: viagem inválida, fora de andamento, já atrasada ou minutos inválidos'; -- Essa é a mensgem para caso aconteça algum erro quando se chamar a Procedure
   END IF; -- Finaliza o IF
 
-  INSERT INTO atraso (id_viagem, id_motivo, minutos_atraso, observacao)
+  INSERT INTO atraso (id_viagem, id_motivo, minutos_atraso, observacao)   -- Se passou dos 4 procedimentos, ele insere as variaveis na tabela atraso (Caso seja inserido algo dado invalido entre eles, a transção é desfeito com o ROLLBACK)
   VALUES (p_id_viagem, p_id_motivo, p_minutos, p_observacao);
 
-  COMMIT;
+  COMMIT;   -- O COMMIT confirma as alterações feitas na transação, tornando-as permanentes no BD
 END$$
 
 DELIMITER ;
 
--- Executando a procedure 1
+-- Executando a Procedure 1
 CALL sp_atrasos_da_linha('101');   -- Esperado: 4 atrasos (viagens 5, 7, 8 e 9)
 CALL sp_atrasos_da_linha('303');   -- Esperado: 1 atraso (viagem 14)
-CALL sp_atrasos_da_linha('999');   -- Esperado: nenhuma linha (essa linha não existe)
+CALL sp_atrasos_da_linha('999');   -- Esperado: Nenhuma linha (essa linha não existe)
 
 -- 3.2 Transação de sucesso (COMMIT) na viagem 18, que está em andamento
+
 -- Antes
-SELECT id_viagem, status, teve_atraso FROM viagem WHERE id_viagem = 18;    -- Esperado: EM_ANDAMENTO, 0
-SELECT COUNT(*) AS atrasos_da_viagem_18 FROM atraso WHERE id_viagem = 18;  -- Esperado: 0
+SELECT id_viagem, status, teve_atraso FROM viagem WHERE id_viagem = 18;   -- Esperado: EM_ANDAMENTO, 0
+SELECT COUNT(*) AS atrasos_da_viagem_18 FROM atraso WHERE id_viagem = 18;   -- Esperado: 0
 
 CALL sp_registrar_atraso(18, 1, 12, 'Trânsito parado na avenida principal.');
 
 -- Depois
-SELECT id_viagem, status, teve_atraso FROM viagem WHERE id_viagem = 18;    -- Esperado: EM_ANDAMENTO, 1
-SELECT COUNT(*) AS atrasos_da_viagem_18 FROM atraso WHERE id_viagem = 18;  -- Esperado: 1
+SELECT id_viagem, status, teve_atraso FROM viagem WHERE id_viagem = 18;   -- Esperado: EM_ANDAMENTO, 1
+SELECT COUNT(*) AS atrasos_da_viagem_18 FROM atraso WHERE id_viagem = 18;   -- Esperado: 1
 
--- 3.3 Efeito do ON DELETE CASCADE (sem erro)
+-- 3.3 Efeito do ON DELETE CASCADE
 -- O teste fica dentro de uma transação e termina com ROLLBACK
 -- para os dados voltarem ao que eram antes
 START TRANSACTION;
   SELECT COUNT(*) AS atrasos_da_viagem_2 FROM atraso WHERE id_viagem = 2;   -- Esperado: 1
-  DELETE FROM viagem WHERE id_viagem = 2;                                    -- O CASCADE apaga o atraso junto
+  DELETE FROM viagem WHERE id_viagem = 2;    -- O CASCADE apaga o atraso junto
   SELECT COUNT(*) AS atrasos_da_viagem_2 FROM atraso WHERE id_viagem = 2;   -- Esperado: 0
 ROLLBACK;
-SELECT COUNT(*) AS atrasos_da_viagem_2 FROM atraso WHERE id_viagem = 2;     -- Esperado: 1 (voltou)
-SELECT COUNT(*) AS total_viagens FROM viagem;                                -- Esperado: 19
+SELECT COUNT(*) AS atrasos_da_viagem_2 FROM atraso WHERE id_viagem = 2;   -- Esperado: 1 (voltou)
+SELECT COUNT(*) AS total_viagens FROM viagem;   -- Esperado: 19
 
 
--- ######################################################################
--- PARTE 4 - [ADMIN] Índice e EXPLAIN
--- ######################################################################
--- Como funciona
---   Índice   é um "catálogo" que ajuda o MySQL a achar os registros sem ler a tabela toda
---   EXPLAIN  mostra o caminho que o MySQL escolheu para executar a consulta
---     type = ALL  o MySQL leu a tabela inteira (sem usar índice)
---     type = ref  o MySQL foi direto aos registros pelo índice
---     key         nome do índice usado (NULL = nenhum)
---     rows        quantidade estimada de linhas que o MySQL precisou examinar
--- Consulta escolhida: viagens de um dia específico (filtro por data_viagem)
--- Com 19 viagens o índice não faria diferença, então vamos aumentar a tabela
--- copiando as viagens que já existem
+-- 4 - [ADMIN] Índice e EXPLAIN
 
--- Selecione só o comando abaixo e execute 6 vezes (a cada vez a tabela dobra de tamanho)
-INSERT INTO viagem
-  (id_linha, id_veiculo, id_motorista, data_viagem,
-   saida_prevista, saida_real, chegada_prevista, chegada_real, status, teve_atraso)
-SELECT id_linha, id_veiculo, id_motorista, data_viagem,
-   saida_prevista, saida_real, chegada_prevista, chegada_real, status, teve_atraso
+-- O Indicie no geral ele filtra as linhas que interessam, mas como se tem poucos registros, podemos multiplicar eles para filtras de uma maneira melhor
+
+-- Execute 6 vezes (a cada vez a tabela dobra de tamanho)
+INSERT INTO viagem 
+  (id_linha, id_veiculo, id_motorista, data_viagem, saida_prevista, saida_real, chegada_prevista, chegada_real, status, teve_atraso)
+  SELECT id_linha, id_veiculo, id_motorista, data_viagem, saida_prevista, saida_real, chegada_prevista, chegada_real, status, teve_atraso
 FROM viagem;
 
-SELECT COUNT(*) AS total_viagens FROM viagem;   -- Esperado depois das 6 execuções: 1216
+SELECT COUNT(*) AS total_viagens FROM viagem;   -- 1216
 
 -- Atualiza as estatísticas que o MySQL usa para escolher o caminho
 ANALYZE TABLE viagem;
@@ -351,120 +340,88 @@ DELETE FROM viagem WHERE id_viagem > 19;
 SELECT COUNT(*) AS total_viagens FROM viagem;   -- Esperado: 19
 
 
--- ######################################################################
 -- PARTE 5 - [ADMIN] Usuário operacional e GRANT
--- ######################################################################
--- Como funciona
---   CREATE USER  cria um usuário e define a senha
---   GRANT        concede permissões (quem pode fazer o quê)
---   REVOKE       retira permissões
--- O operador consulta, insere e atualiza, mas não exclui (RN11)
+
 CREATE USER 'operador_transporte'@'localhost' IDENTIFIED BY 'Senha@123';
 
-GRANT SELECT, INSERT, UPDATE
-ON transporte_publico.*
-TO 'operador_transporte'@'localhost';
+GRANT SELECT, INSERT, UPDATE   -- Permissoes que o usuário terá
+ON transporte_publico.*   -- Em qual banco ele terá essas permissões
+TO 'operador_transporte'@'localhost';   -- Qual usuário terá tudo isso
 
 SHOW GRANTS FOR 'operador_transporte'@'localhost';   -- Esperado: SELECT, INSERT, UPDATE
 
--- Antes de seguir, crie uma nova conexão no Workbench (botão "+" ao lado de
--- "MySQL Connections") com usuário operador_transporte, senha Senha@123,
--- host 127.0.0.1 e porta 3306. Abra essa conexão em outra aba
+-- PARTE 6 - [OPERADOR] Uma operação permitida e uma negada (um comando por vez)
 
-
--- ######################################################################
--- PARTE 6 - [OPERADOR] Uma operação permitida e uma negada
--- (um comando por vez)
--- ######################################################################
 USE transporte_publico;
 
 -- 6.1 Permitida: o operador tem SELECT e UPDATE
-SELECT prefixo, status FROM veiculo WHERE placa = 'JKL3456';        -- Esperado: F-105, ATIVO
+SELECT prefixo, status FROM veiculo WHERE placa = 'JKL3456';   -- Esperado: F-105, ATIVO
 UPDATE veiculo SET status = 'MANUTENCAO' WHERE placa = 'JKL3456';   -- Esperado: 1 row affected
-SELECT prefixo, status FROM veiculo WHERE placa = 'JKL3456';        -- Esperado: F-105, MANUTENCAO
+SELECT prefixo, status FROM veiculo WHERE placa = 'JKL3456';   -- Esperado: F-105, MANUTENCAO
 
--- 6.2 Negada (gera erro de propósito): o operador não tem DELETE
--- Erro esperado: 1142 - DELETE command denied to user 'operador_transporte'@'localhost' for table 'atraso'
+-- 6.2 Negada: Como o operador não tem DELETE, o MySQL gera dá erro
 DELETE FROM atraso WHERE id_atraso = 1;
 
 
--- ######################################################################
 -- PARTE 7 - [ADMIN] REVOKE (retirando a permissão de UPDATE)
--- ######################################################################
-REVOKE UPDATE
-ON transporte_publico.*
-FROM 'operador_transporte'@'localhost';
+
+REVOKE UPDATE -- Remove a permissão de UPDATE 
+ON transporte_publico.*   -- Do banco transporte_publico
+FROM 'operador_transporte'@'localhost';   -- Do usuário operador_transporte
 
 SHOW GRANTS FOR 'operador_transporte'@'localhost';   -- Esperado: agora só SELECT e INSERT
 
 
--- ######################################################################
 -- PARTE 8 - [OPERADOR] Testando de novo a permissão retirada
--- ######################################################################
--- Rode o USE abaixo para o MySQL recarregar as permissões nesta conexão
--- Se o UPDATE ainda funcionar, feche e abra a conexão do operador de novo
+
 USE transporte_publico;
 
 -- Gera erro de propósito: o mesmo UPDATE que funcionou na parte 6 agora é negado
--- Erro esperado: 1142 - UPDATE command denied to user 'operador_transporte'@'localhost' for table 'veiculo'
 UPDATE veiculo SET status = 'ATIVO' WHERE placa = 'JKL3456';
 
 -- O SELECT continua permitido
 SELECT prefixo, status FROM veiculo WHERE placa = 'JKL3456';   -- Esperado: F-105 ainda em MANUTENCAO
 
 
--- ######################################################################
--- PARTE 9 - [ADMIN] Testes que geram erro de propósito
--- (um por vez, na conexão do administrador)
--- ######################################################################
+-- PARTE 9 - [ADMIN] Testes que geram erro de propósito (Uma por vez)
+
 USE transporte_publico;
 
 -- Limpeza da parte 6: o administrador devolve o veículo F-105 para ATIVO
 UPDATE veiculo SET status = 'ATIVO' WHERE placa = 'JKL3456';
 
 -- 9.1 A chave estrangeira recusa um vínculo inválido: viagem de uma linha que não existe
--- Erro esperado: 1452 - Cannot add or update a child row: a foreign key constraint fails
+-- 1452 - Cannot add or update a child row: a foreign key constraint fails
 INSERT INTO viagem (id_linha, id_veiculo, id_motorista, data_viagem, saida_prevista, chegada_prevista)
 VALUES (99, 1, 1, '2026-11-24', '06:00:00', '06:40:00');
 
 -- 9.2 Regra de exclusão (RESTRICT): não se apaga uma linha que já tem viagens
--- Erro esperado: 1451 - Cannot delete or update a parent row: a foreign key constraint fails
+-- 1451 - Cannot delete or update a parent row: a foreign key constraint fails
 DELETE FROM linha WHERE id_linha = 1;
 
 -- 9.3 Regra do UNIQUE (RN01): número de linha repetido
--- Erro esperado: 1062 - Duplicate entry '101' for key 'linha.numero'
+-- 1062 - Duplicate entry '101' for key 'linha.numero'
 INSERT INTO linha (numero, nome, tarifa) VALUES ('101', 'Linha repetida', 5.50);
 
 -- 9.4 Transação com falha: ROLLBACK desfaz a primeira alteração (viagem 19)
 -- O motivo 99 não existe: o UPDATE (passo 1) funciona, mas o INSERT (passo 2) falha
 -- Antes
-SELECT id_viagem, status, teve_atraso FROM viagem WHERE id_viagem = 19;    -- Esperado: EM_ANDAMENTO, 0
-SELECT COUNT(*) AS atrasos_da_viagem_19 FROM atraso WHERE id_viagem = 19;  -- Esperado: 0
+-- 1452 - Cannot add or update a child row: a foreign key constraint fails
+SELECT id_viagem, status, teve_atraso FROM viagem WHERE id_viagem = 19;   -- Esperado: EM_ANDAMENTO, 0
+SELECT COUNT(*) AS atrasos_da_viagem_19 FROM atraso WHERE id_viagem = 19;   -- Esperado: 0
 
--- Erro esperado: 1452 - Cannot add or update a child row: a foreign key constraint fails
-CALL sp_registrar_atraso(19, 99, 15, 'Teste de rollback');
+CALL sp_registrar_atraso(19, 99, 15, 'Teste de ROLLBACK'); 
 
 -- Depois: nada mudou, porque o ROLLBACK desfez também o UPDATE
-SELECT id_viagem, status, teve_atraso FROM viagem WHERE id_viagem = 19;    -- Esperado: EM_ANDAMENTO, 0
-SELECT COUNT(*) AS atrasos_da_viagem_19 FROM atraso WHERE id_viagem = 19;  -- Esperado: 0
+SELECT id_viagem, status, teve_atraso FROM viagem WHERE id_viagem = 19;   -- Esperado: EM_ANDAMENTO, 0
+SELECT COUNT(*) AS atrasos_da_viagem_19 FROM atraso WHERE id_viagem = 19;   -- Esperado: 0
 
 -- 9.5 Regras da procedure (RN07, RN08 e RN09): cada chamada abaixo é recusada
--- Erro esperado nas três: 1644 - Atraso recusado: viagem inválida, fora de andamento, já atrasada ou minutos inválidos
+-- 1644 - Atraso recusado: viagem inválida, fora de andamento, já atrasada ou minutos inválidos
 CALL sp_registrar_atraso(17, 1, 10, 'Viagem cancelada');   -- Viagem cancelada
-CALL sp_registrar_atraso(2, 1, 10, 'Viagem já atrasada');  -- Viagem concluída que já tem atraso
+CALL sp_registrar_atraso(2, 1, 10, 'Viagem já atrasada');   -- Viagem concluída que já tem atraso
 CALL sp_registrar_atraso(19, 1, 0, 'Minutos inválidos');   -- Minutos iguais a zero
 
 -- Conferência final: nada disso entrou no banco
-SELECT COUNT(*) AS total_linhas  FROM linha;   -- Esperado: 4
-SELECT COUNT(*) AS total_atrasos FROM atraso;  -- Esperado: 11 (os 10 iniciais mais o da viagem 18)
-
--- ACID neste projeto (para o relatório e a apresentação)
---   Atomicidade   registrar o atraso e marcar a viagem são um bloco só; se um passo
---                 falha, o ROLLBACK desfaz tudo (teste 9.4)
---   Consistência  o banco nunca fica com atraso sem viagem ou sem motivo válido,
---                 porque as chaves estrangeiras barram isso
---   Isolamento    enquanto a transação não é confirmada, outra conexão não enxerga
---                 a alteração pela metade
---   Durabilidade  depois do COMMIT (teste 3.2) o dado fica gravado, mesmo que o
---                 servidor seja reiniciado
--- Fim do script
+SELECT COUNT(*) AS total_linhas  FROM linha;    -- Esperado: 4
+SELECT COUNT(*) AS total_atrasos FROM atraso;   -- Esperado: 11 (os 10 iniciais mais o da viagem 18)

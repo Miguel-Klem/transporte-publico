@@ -29,3 +29,23 @@
 -- RESIGNAL - Mostra para quem chamou o erro que originou o ROLLBACK
 -- O UPDATE só acerta a viagem se ela existe, está em andamento, ainda não tem -- atraso e os minutos são maiores que zero (RN07, RN08 e RN09)
 -- Se o INSERT falhar (por exemplo, motivo inexistente), o ROLLBACK desfaz também o UPDATE (RN10)
+--   Índice   é um "catálogo" que ajuda o MySQL a achar os registros sem ler a tabela toda
+--   EXPLAIN  mostra o caminho que o MySQL escolheu para executar a consulta
+--     type = ALL  o MySQL leu a tabela inteira (sem usar índice)
+--     type = ref  o MySQL foi direto aos registros pelo índice
+--     key         nome do índice usado (NULL = nenhum)
+--     rows        quantidade estimada de linhas que o MySQL precisou examinar
+--   CREATE USER  cria um usuário e define a senha
+--   GRANT        concede permissões (quem pode fazer o quê)
+--   REVOKE       retira permissões
+-- O operador consulta, insere e atualiza, mas não exclui (RN11)
+-- ACID neste projeto (para o relatório e a apresentação)
+--   Atomicidade   registrar o atraso e marcar a viagem são um bloco só; se um passo
+--                 falha, o ROLLBACK desfaz tudo (teste 9.4)
+--   Consistência  o banco nunca fica com atraso sem viagem ou sem motivo válido,
+--                 porque as chaves estrangeiras barram isso
+--   Isolamento    enquanto a transação não é confirmada, outra conexão não enxerga
+--                 a alteração pela metade
+--   Durabilidade  depois do COMMIT (teste 3.2) o dado fica gravado, mesmo que o
+--                 servidor seja reiniciado
+-- Fim do script
